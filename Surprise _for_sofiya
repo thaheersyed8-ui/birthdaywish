@@ -1,0 +1,58 @@
+import sys
+import time
+from rich.console import Console
+from rich.panel import Panel
+from rich.text import Text
+from rich.prompt import Prompt
+from rich.progress import Progress, SpinnerColumn, TextColumn
+from rich.align import Align
+
+console = Console()
+
+def clear_screen():
+    console.clear()
+
+def transition_delay(seconds=1):
+    time.sleep(seconds)
+
+def animated_text(text, style="bold cyan", delay=0.03):
+    """Types out text character by character for a clean transition effect."""
+    for char in text:
+        console.print(char, end="", style=style)
+        time.sleep(delay)
+    console.print()
+
+def show_bismillah():
+    clear_screen()
+    bismillah_arabic = "بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ"
+    
+    panel = Panel(
+        Align.center(
+            Text(bismillah_arabic, style="bold gold1", justify="center")
+        ),
+        title="[bold white]✨ Welcome to Advanced Birthday Experience ✨[/bold white]",
+        border_style="bright_yellow",
+        padding=(2, 4)
+    )
+    
+    console.print("\n\n")
+    console.print(panel)
+    transition_delay(2.5)
+
+def pin_authentication():
+    clear_screen()
+    correct_pin = "28/04/2006"
+    attempts = 0
+    
+    console.print(Align.center(Panel("[bold magenta]🔒 ADVANCED BIRTHDAY VAULT - SOFIYA 🔒[/bold magenta]", border_style="magenta")))
+    console.print("\n")
+    
+    while True:
+        user_input = Prompt.ask("[bold yellow]Enter Sofiya's Date of Birth (DD/MM/YYYY) to Unlock[/bold yellow]")
+        
+        with Progress(
+            SpinnerColumn(),
+            TextColumn("[progress.description]{task.description}"),
+            transient=True
+        ) as progress:
+            progress.add_task(description="Verifying PIN...", total=None)
